@@ -34,11 +34,11 @@ export class Game extends Phaser.Scene {
   private grid: Array<Array<Phaser.GameObjects.Graphics | null>> = [];
   private selected: { row: number; col: number } | null = null;
   private particles!: Phaser.GameObjects.Particles.ParticleEmitter;
+
   private score: number = 0;
   private moves: number = 30;
   private scoreText!: Phaser.GameObjects.Text;
   private movesText!: Phaser.GameObjects.Text;
-  private uiBg!: Phaser.GameObjects.Rectangle;
 
   constructor() {
     super('Game');
@@ -64,22 +64,24 @@ export class Game extends Phaser.Scene {
       emitting: false,
     });
 
-    this.buildGrid();
-
     this.scoreText = this.add
-      .text(20, 20, `Score: ${this.score}`, {
-        fontSize: '24px',
+      .text(30, 35, `Score: ${this.score}`, {
+        fontSize: '28px',
         color: '#ffffff',
       })
+      .setOrigin(0)
       .setScrollFactor(0)
-      .setOrigin(0);
+      .setDepth(20);
     this.movesText = this.add
-      .text(20, 60, `Moves: ${this.moves}`, {
-        fontSize: '24px',
+      .text(30, 75, `Moves: ${this.moves}`, {
+        fontSize: '28px',
         color: '#ffffff',
       })
+      .setOrigin(0)
       .setScrollFactor(0)
-      .setOrigin(0);
+      .setDepth(20);
+
+    this.buildGrid();
 
     this.input.on('gameobjectdown', this.onTileClick, this);
   }

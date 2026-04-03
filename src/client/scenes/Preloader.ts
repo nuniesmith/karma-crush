@@ -27,6 +27,9 @@ export class Preloader extends Scene {
     this.load.setPath('../assets');
 
     this.load.image('logo', 'logo.png');
+    this.load.audio('swap', '/sounds/swap.ogg');
+    this.load.audio('match', '/sounds/match.ogg');
+    this.load.audio('cascade', '/sounds/cascade.ogg');
   }
 
   create() {

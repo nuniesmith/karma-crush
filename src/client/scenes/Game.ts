@@ -38,6 +38,7 @@ export class Game extends Phaser.Scene {
   private moves: number = 30;
   private scoreText!: Phaser.GameObjects.Text;
   private movesText!: Phaser.GameObjects.Text;
+  private uiBg!: Phaser.GameObjects.Rectangle;
 
   constructor() {
     super('Game');
@@ -219,14 +220,27 @@ export class Game extends Phaser.Scene {
     const x2 = c2 * TILE + TILE / 2;
     const y2 = r2 * TILE + TILE / 2;
 
-    this.tweens.add({ targets
-    const tween2 = this.tweens.add({
-      targets: t2,
-      x: x1,
-      y: y1,
-      duration: 200,
-    });
-    if (isTrialSwap) {
+    if (t1) {
+      this.tweens.add({
+        targets: t1,
+        x: x2,
+        y: y2,
+        duration: 250,
+        ease: 'Quad.easeOut',
+      });
+    }
+
+    const tween2 = t2
+      ? this.tweens.add({
+          targets: t2,
+          x: x1,
+          y: y1,
+          duration: 250,
+          ease: 'Quad.easeOut',
+        })
+      : undefined;
+
+    if (isTrialSwap && tween2) {
       tween2.once('complete', () => {
         const matches = this.findMatches();
         if (matches.length === 0) {

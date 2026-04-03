@@ -301,3 +301,16 @@ Click any box above to dive into that system. Here's the full breakdown of every
 9. Devvit SDK (flair, comments)
 10. Realtime + Payments (polish)
 
+Here's everything beyond the core systems — the stuff that separates a working prototype from something people actually come back to.Tick things off as you go — it saves your progress. Here's the thinking behind each category:
+
+**Game feel** is arguably the most important category after the core loop. Candy Crush is satisfying not because of the grid — it's because of the *pop*, the screen shake, the cascade sounds. This is what keeps people playing.
+
+**Level system** is what gives the game longevity. Without goals and move limits, it's a sandbox with no stakes. The level config format is worth designing carefully early because everything else depends on it.
+
+**State machine** sounds boring but prevents a whole class of bugs. Without it, players can trigger two swaps simultaneously, or interact with the grid mid-cascade, which corrupts the array and breaks everything silently.
+
+**Mobile & performance** matters a lot on Reddit because most users are on the mobile app. Touch drag detection (distinguishing a tap from a swipe) is trickier than it sounds and worth building a dedicated `InputManager` class for.
+
+**Reddit / Devvit** specifics are what make this feel like a Reddit game vs a generic web game. The post preview thumbnail is the #1 factor for click-through rate in the feed — worth putting real effort into that image.
+
+**Polish & launch** includes the colorblind mode, which is easy to add (just put a shape overlay on each candy) and makes your game accessible to ~8% of players who'd otherwise struggle with color-only differentiation.

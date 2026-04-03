@@ -65,24 +65,20 @@ export class Game extends Phaser.Scene {
 
     this.buildGrid();
 
-    this.scoreText = this.add.text(
-      COLS * TILE + 10,
-      10,
-      `Score: ${this.score}`,
-      {
+    this.scoreText = this.add
+      .text(20, 20, `Score: ${this.score}`, {
         fontSize: '24px',
         color: '#ffffff',
-      }
-    );
-    this.movesText = this.add.text(
-      COLS * TILE + 10,
-      50,
-      `Moves: ${this.moves}`,
-      {
+      })
+      .setScrollFactor(0)
+      .setOrigin(0);
+    this.movesText = this.add
+      .text(20, 60, `Moves: ${this.moves}`, {
         fontSize: '24px',
         color: '#ffffff',
-      }
-    );
+      })
+      .setScrollFactor(0)
+      .setOrigin(0);
 
     this.input.on('gameobjectdown', this.onTileClick, this);
   }
@@ -223,7 +219,7 @@ export class Game extends Phaser.Scene {
     const x2 = c2 * TILE + TILE / 2;
     const y2 = r2 * TILE + TILE / 2;
 
-    this.tweens.add({ targets: t1, x: x2, y: y2, duration: 200 });
+    this.tweens.add({ targets
     const tween2 = this.tweens.add({
       targets: t2,
       x: x1,

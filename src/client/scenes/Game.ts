@@ -198,7 +198,13 @@ export class Game extends Phaser.Scene {
   }
 
   // ─── Swap ──────────────────────────────────────────────────────────────────
-  private swapTiles(r1: number, c1: number, r2: number, c2: number): void {
+  private swapTiles(
+    r1: number,
+    c1: number,
+    r2: number,
+    c2: number,
+    isTrialSwap: boolean = true
+  ): void {
     const t1 = this.cell(r1, c1);
     const t2 = this.cell(r2, c2);
 
@@ -218,15 +224,17 @@ export class Game extends Phaser.Scene {
     const y2 = r2 * TILE + TILE / 2;
 
     this.tweens.add({ targets: t1, x: x2, y: y2, duration: 200 });
-    this.tweens.add({
+    const tween2 = this.tweens.add({
       targets: t2,
       x: x1,
       y: y1,
       duration: 200,
-      onComplete: () => {
+    });
+    if (isTrialSwap) {
+      tween2.once('complete', () => {
         const matches = this.findMatches();
         if (matches.length === 0) {
-          this.swapTiles(r1, c1, r2, c2);
+          this.swapTiles(r1, c1, r2, c2, false);
         } else {
           this.moves--;
           this.movesText.setText(`Moves: ${this.moves}`);
@@ -236,8 +244,8 @@ export class Game extends Phaser.Scene {
           }
           this.resolveMatches(matches);
         }
-      },
-    });
+      });
+    }
   }
 
   // ─── Match detection ───────────────────────────────────────────────────────
